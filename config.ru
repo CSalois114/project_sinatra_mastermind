@@ -1,2 +1,2 @@
-require './app.ru'
+require 'app.rb'
 run Sinatra::Application
