@@ -1,8 +1,12 @@
+require_relative "patterntohtml"
+
 class Guess 
-  attr_reader :pattern, :comparison
+  attr_reader :pattern, :comparison, :html
+  include PatternToHTML
   def initialize(key, pattern)
     @key = key
     @pattern = pattern
+    @html = pattern_to_html(@pattern.dup)
     @comparison = compare_to_key()
   end
 
@@ -10,8 +14,8 @@ class Guess
   
   def compare_to_key
     comparison = []
-    key_copy = @key.array.dup
-    pattern_copy = @pattern.array.dup
+    key_copy = @key.dup
+    pattern_copy = @pattern.dup
   
     key_copy.length.times do |index|
       if pattern_copy[index] == key_copy[index]

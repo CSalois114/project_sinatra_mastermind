@@ -2,10 +2,10 @@ require "sinatra"
 
 require_relative "./lib/mastermind"
 
-mastermind = nil
+enable :sessions
 
-get '/' do 
-  mastermind = Mastermind.new
+get '/' do
+  session.clear
   erb :index
 end
 
@@ -14,18 +14,18 @@ get '/set_key' do
 end
 
 post '/set_key' do
-  mastermind = Mastermind.new(params.values)
+  session[:key] = params.values
   redirect '/game'
 end
 
 get '/game' do
-  @mastermind = mastermind
+  session[:guesses] ||= []
+  @mastermind = Mastermind.new(session[:guesses], session[:key])
+  session[:key] = @mastermind.key
   erb :game 
 end
 
 post '/game' do
-  mastermind.guess(params.values)
+  session[:guesses] << params.values
   redirect '/game'
 end
-
-

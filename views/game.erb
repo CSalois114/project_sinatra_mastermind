@@ -9,7 +9,7 @@
         <tr>
           <td>
             <% if @mastermind.guesses[index] %>
-              <%= @mastermind.guesses[index].pattern.html %>
+              <%= @mastermind.guesses[index].html %>
             <% else %>
               <font color='gray'>&#11044&#11044&#11044&#11044</font>
             <% end %>
@@ -29,10 +29,10 @@
    <p>
     <% if @mastermind.winner? %>
       You Win! The Key was: <br/>
-      <%= @mastermind.key.html %>
+      <%= @mastermind.html_key %>
     <% elsif @mastermind.looser? %>
       You Loose. The Key was: <br/>
-       <%= @mastermind.key.html %>
+       <%= @mastermind.html_key %>
     <% else %>
       <form method='POST' action='/game'>
         <select name='peg1'>

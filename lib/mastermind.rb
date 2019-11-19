@@ -1,25 +1,23 @@
 require_relative "guess"
-require_relative "pattern"
+require_relative "patterntohtml"
 
 class Mastermind
-  attr_reader :key, :guesses, :num_of_turns
+  attr_reader :key, :guesses, :num_of_turns, :html_key  
+  include PatternToHTML
 
-  def initialize(key=get_random_key)
-    @key = Pattern.new(key)
-    @guesses = []
+  def initialize(guesses, key)
+    @key = key ? key : get_random_key
+    @html_key = pattern_to_html(@key.dup)
+    @guesses = guesses.map {|guess| Guess.new(@key, guess)}
     @num_of_turns = 15
   end
 
-  def guess(pattern)
-    @guesses << Guess.new(@key, Pattern.new(pattern))
-  end
-
   def winner?
-    @guesses.last && @guesses.last.pattern.array == @key.array
+    @guesses.last && @guesses.last.pattern == @key
   end
 
   def looser?
-     @guesses.length == @num_of_turns && @guesses.last.pattern.array != @key.array
+     @guesses.length == @num_of_turns && @guesses.last.pattern != @key
   end
 
   def get_random_key 
