@@ -9,7 +9,7 @@ class Mastermind
     @key = key ? key : get_random_key
     @html_key = pattern_to_html(@key.dup)
     @guesses = guesses.map {|guess| Guess.new(@key, guess)}
-    @num_of_turns = 15
+    @num_of_turns = 12
   end
 
   def winner?
