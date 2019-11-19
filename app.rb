@@ -1,7 +1,6 @@
 require "sinatra"
-require 'sinatra/reloader' if development?
 
-require_relative "lib/mastermind"
+require_relative "./lib/mastermind"
 
 mastermind = nil
 
