@@ -3,78 +3,80 @@
     <h1>Mastermind</h1>
   </head>
   <body bgcolor=#a3c2d9>
-   <p>
-    <table align=center>
-      <% @mastermind.num_of_turns.times do |index| %>
-        <tr>
-          <td>
-            <% if @mastermind.guesses[index] %>
-              <%= @mastermind.guesses[index].html %>
-            <% else %>
-              <font color='gray'>&#11044&#11044&#11044&#11044</font>
-            <% end %>
-          </td>
-          <td style="font-size:5px"> 
-            <% if @mastermind.guesses[index] %>    
-              <%= @mastermind.guesses[index].comparison[0] %>
-              <%= @mastermind.guesses[index].comparison[1] %><br/>
-              <%= @mastermind.guesses[index].comparison[2] %>
-              <%= @mastermind.guesses[index].comparison[3] %> 
-            <% end %>  
-          </td>
-        </tr>
+    <p>
+      <table align=center>
+        <% @mastermind.num_of_turns.times do |index| %>
+          <tr>
+            <td>
+              <% if @mastermind.guesses[index] %>
+                <%= @mastermind.guesses[index].html %>
+              <% else %>
+                <font color='gray'>&#11044&#11044&#11044&#11044</font>
+              <% end %>
+            </td>
+            <td style="font-size:5px"> 
+              <% if @mastermind.guesses[index] %>    
+                <%= @mastermind.guesses[index].comparison[0] %>
+                <%= @mastermind.guesses[index].comparison[1] %><br/>
+                <%= @mastermind.guesses[index].comparison[2] %>
+                <%= @mastermind.guesses[index].comparison[3] %> 
+              <% end %>  
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </p>
+    <p>
+      <% if @mastermind.winner? %>
+        You Win! The Key was: <br/>
+        <%= @mastermind.html_key %>
+      <% elsif @mastermind.looser? %>
+        You Loose. The Key was: <br/>
+        <%= @mastermind.html_key %>
+      <% else %>
+        <form method='POST' action='/game'>
+          <select name='peg1'>
+            <option value='blue'>  Blue  </option>
+            <option value='red'>   Red   </option>
+            <option value='green'> Green </option>
+            <option value='yellow'>Yellow</option>
+            <option value='orange'>Orange</option>
+            <option value='purple'>Purple</option>
+          </select>
+          <select name='peg2'>
+            <option value='blue'>  Blue  </option>
+            <option value='red'>   Red   </option>
+            <option value='green'> Green </option>
+            <option value='yellow'>Yellow</option>
+            <option value='orange'>Orange</option>
+            <option value='purple'>Purple</option>
+          </select>
+          <select name='peg3'>
+            <option value='blue'>  Blue  </option>
+            <option value='red'>   Red   </option>
+            <option value='green'> Green </option>
+            <option value='yellow'>Yellow</option>
+            <option value='orange'>Orange</option>
+            <option value='purple'>Purple</option>
+          </select>
+          <select name='peg4'>
+            <option value='blue'>  Blue  </option>
+            <option value='red'>   Red   </option>
+            <option value='green'> Green </option>
+            <option value='yellow'>Yellow</option>
+            <option value='orange'>Orange</option>
+            <option value='purple'>Purple</option>
+          </select>
+          <br/><br/>   
+          <input type='submit' value='guess' />  
+        </form>
       <% end %>
-    </table>
-   </p>
-   <p>
-    <% if @mastermind.winner? %>
-      You Win! The Key was: <br/>
-      <%= @mastermind.html_key %>
-    <% elsif @mastermind.looser? %>
-      You Loose. The Key was: <br/>
-       <%= @mastermind.html_key %>
-    <% else %>
-      <form method='POST' action='/game'>
-        <select name='peg1'>
-          <option value='blue'>  Blue</option>
-          <option value='red'>   Red</option>
-          <option value='green'> Green</option>
-          <option value='yellow'>Yellow</option>
-          <option value='orange'>Orange</option>
-          <option value='purple'>Purple</option>
-        </select>
-        <select name='peg2'>
-          <option value='blue'>  Blue</option>
-          <option value='red'>   Red</option>
-          <option value='green'> Green</option>
-          <option value='yellow'>Yellow</option>
-          <option value='orange'>Orange</option>
-          <option value='purple'>Purple</option>
-        </select>
-        <select name='peg3'>
-          <option value='blue'>  Blue</option>
-          <option value='red'>   Red</option>
-          <option value='green'> Green</option>
-          <option value='yellow'>Yellow</option>
-          <option value='orange'>Orange</option>
-          <option value='purple'>Purple</option>
-        </select>
-        <select name='peg4'>
-          <option value='blue'>  Blue</option>
-          <option value='red'>   Red</option>
-          <option value='green'> Green</option>
-          <option value='yellow'>Yellow</option>
-          <option value='orange'>Orange</option>
-          <option value='purple'>Purple</option>
-        </select>
-        <br/><br/>   
-        <input type='submit' value='guess' />  
-      </form>
-    <% end %>
-   </p>
-   <p align=left>
-     <button onclick="window.location.href = '/';">New Game</button>
-   </p>
+    </p>
+    <p>
+      <br/>
+      <br/>
+      <button onclick="window.location.href = '/';">New Game</button>
+    </p>
   </body>
   
 </html>
